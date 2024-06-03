@@ -55,7 +55,7 @@ def export_file_paths(path_dictionary, output_path):
 if __name__ == '__main__':
     tree_file_path = r"D:\testScripts\batch\directory_listing.txt"  # Path to the tree file
     output_file_path = r"D:\testScripts\testOutput"  # Output file path
-    search_filename = "sandbox"  # Filename to search for
+    search_filename = "limiter"  # Filename to search for
 
     file_paths = find_file_in_tree(tree_file_path, search_filename)
     export_file_paths(file_paths, output_file_path)
