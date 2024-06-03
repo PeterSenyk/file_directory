@@ -29,6 +29,7 @@ def check_lines(lines, filename):
             count = 0
         elif line.strip() == '' and count > 0:
             if current_dir:
+                current_dir = current_dir.removeprefix("Directory: ")
                 file_path_dictionary[current_dir] = count
                 current_dir = ''
                 count = 0
