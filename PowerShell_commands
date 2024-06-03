@@ -1,0 +1,5 @@
+// Set location in powershell <<Set location of drive to search
+Set-Location -Path "D:\"
+
+// Get file directory <<Set FilePath for output
+Get-ChildItem -Recurse -Force | Out-File -FilePath 'D:\testScripts\batch\directory_listing.txt' -Encoding Unicode
