@@ -1,3 +1,9 @@
+"""
+Program to search a file directory and return file paths
+@author: Peter Senyk
+@version: 2024_0.2
+"""
+
 import csv
 from datetime import datetime
 
