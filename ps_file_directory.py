@@ -7,18 +7,30 @@ Program to find files in a file directory tree and return file paths
 
 def find_file_in_tree(tree_file_path, search_filename):
     file_path_dictionary = {}
-    count = 0
-    with open(tree_file_path, 'r', encoding='cp437') as file:
+    with open(tree_file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
-        for line in lines:
-            if search_filename.lower() in line.lower():
-                print(line)
-
-
-def export_file_paths(file_path_set, output_file_path):
-    with open(output_file_path, 'w') as file:
-        for path in file_path_set:
-            file.write(path + '\n')
+    file_path_dictionary = check_lines(lines[::-1], search_filename)
+    return file_path_dictionary
+    
+def check_lines(lines, search_filename):
+    file_path_dictionary = {}
+    count = 0
+    for line in lines:
+        if search_filename in line:
+            count += 1
+        elif "Directory" in line and count > 0:
+            dir_line = clean_directory_line(line)
+            file_path_dictionary[dir_line] = count
+            count = 0
+    return file_path_dictionary
+        
+def clean_directory_line(line):
+    dir_line = line.lstrip(" ").strip("Directory: ")
+    return dir_line
+    
+def clean_dictionary_results(file_path_dictionary):
+    for key, value in file_path_dictionary.items():
+        print(f"{key}\nContains {value} files containing the search\n")
 
 
 if __name__ == '__main__':
