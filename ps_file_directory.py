@@ -8,19 +8,18 @@ import csv
 from datetime import datetime
 
 
-def find_file_in_tree(tree_file_path, search_filename):
-    file_path_dictionary = {}
-    with open(tree_file_path, 'r', encoding='utf-8') as file:
+def find_file_in_tree(file_path, filename):
+    with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
-    file_path_dictionary = check_lines(lines[::-1], search_filename)
+    file_path_dictionary = check_lines(lines[::-1], filename)
     return file_path_dictionary
 
 
-def check_lines(lines, search_filename):
+def check_lines(lines, filename):
     file_path_dictionary = {}
     count = 0
     for line in lines:
-        if search_filename in line:
+        if filename in line:
             count += 1
         elif "Directory" in line and count > 0:
             dir_line = clean_directory_line(line)
@@ -42,8 +41,9 @@ def clean_dictionary_results(file_path_dictionary):
 def export_file_paths(path_dictionary, output_path):
     current_date = datetime.now().strftime("%y-%m-%d")
     file_name = f"Filepath_Output_{current_date}.csv"
+    file_output = output_path + "\\" + file_name
 
-    with open(file_name, "w", newline="") as output_file:
+    with open(file_output, "w", newline="") as output_file:
         writer = csv.writer(output_file)
         writer.writerow(["File Path", "Number of Files"])
 
@@ -52,8 +52,8 @@ def export_file_paths(path_dictionary, output_path):
 
 
 if __name__ == '__main__':
-    tree_file_path = r"C:\Users\SENYKP\Desktop\Projects\file_directory_script\F_PowerShell\directory_listing.txt"  # Path to the tree file
-    output_file_path = r"C:\Users\SENYKP\Desktop\Projects\file_directory_script\Test_Output\TestOutput"  # Output file path
+    tree_file_path = r"D:\testScripts\powershell_tree.txt"  # Path to the tree file
+    output_file_path = r"D:\testScripts\testOutput"  # Output file path
     search_filename = input("Enter your search: ")  # Filename to search for
 
     file_paths = find_file_in_tree(tree_file_path, search_filename)
