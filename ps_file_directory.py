@@ -19,12 +19,12 @@ def check_lines(lines, filename):
     file_path_dictionary = {}
     count = 0
     for line in lines:
-        if filename.lower() in line.lower():
-            count += 1
-        elif "Directory:" in line and count > 0:
+        if "Directory:" in line and count > 0:
             dir_line = clean_directory_line(line)
             file_path_dictionary[dir_line] = count
             count = 0
+        elif filename.lower() in line.lower():
+            count += 1
     print(file_path_dictionary)
     return file_path_dictionary
 
@@ -55,7 +55,7 @@ def export_file_paths(path_dictionary, output_path):
 if __name__ == '__main__':
     tree_file_path = r"D:\testScripts\batch\directory_listing.txt"  # Path to the tree file
     output_file_path = r"D:\testScripts\testOutput"  # Output file path
-    search_filename = "limiter"  # Filename to search for
+    search_filename = "sandbox"  # Filename to search for
 
     file_paths = find_file_in_tree(tree_file_path, search_filename)
     export_file_paths(file_paths, output_file_path)
