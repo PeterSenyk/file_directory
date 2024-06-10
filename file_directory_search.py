@@ -43,14 +43,11 @@ def process_lines(lines, filename):
 
     for i, line in enumerate(lines):
         if "Directory:" in line:
-            # if current_dir and count > 0:
-            #     file_path_dictionary[current_dir] = count
             current_dir = clean_directory_line(line.strip())
             current_dir = check_multiline_directory(lines, i + 1, current_dir)
             count = 0
         elif line.strip() == '' and count > 0:
             if current_dir:
-                # current_dir = clean_directory_line(current_dir)
                 file_path_dictionary[current_dir] = count
                 current_dir = ''
                 count = 0
@@ -114,9 +111,9 @@ def export_file_paths(path_dictionary, search, output_path):
 
 
 if __name__ == '__main__':
-    tree_file_path = r"ENTER\FILEPATH\FOR\DIRECTORY\FILE"  # Path to the tree file
-    output_file_path = r"ENTER\FILEPATH\FOR\OUTPUT\FILE"  # Output file path
-    search_filename = input("Enter your search here: ")  # Filename to search for
+    tree_file_path = r"ENTER\FILEPATH\FOR\DIRECTORY\FILE"
+    output_file_path = r"ENTER\FILEPATH\FOR\OUTPUT\FILE"
+    search_filename = input("Enter your search here: ")
 
     file_paths = find_file_in_tree(tree_file_path, search_filename)
     total_results(file_paths)
