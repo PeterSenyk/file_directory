@@ -114,8 +114,8 @@ def export_file_paths(path_dictionary, search, output_path):
 
 
 if __name__ == '__main__':
-    tree_file_path = r"D:\testScripts\batch\directory_listing.txt"  # Path to the tree file
-    output_file_path = r"D:\testScripts\testOutput"  # Output file path
+    tree_file_path = r"ENTER\FILEPATH\FOR\DIRECTORY\FILE"  # Path to the tree file
+    output_file_path = r"ENTER\FILEPATH\FOR\OUTPUT\FILE"  # Output file path
     search_filename = input("Enter your search here: ")  # Filename to search for
 
     file_paths = find_file_in_tree(tree_file_path, search_filename)
