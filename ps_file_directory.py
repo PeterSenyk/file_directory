@@ -5,7 +5,6 @@ Program to search a file directory and return file paths
 """
 
 import csv
-from datetime import datetime
 
 
 def find_file_in_tree(file_path, filename):
@@ -29,7 +28,7 @@ def check_lines(lines, filename):
             count = 0
         elif line.strip() == '' and count > 0:
             if current_dir:
-                current_dir = current_dir.removeprefix("Directory: ")
+                current_dir = current_dir.removeprefix("Directory: ").removeprefix("Directory:").removeprefix(" ")
                 file_path_dictionary[current_dir] = count
                 current_dir = ''
                 count = 0
@@ -60,9 +59,8 @@ def clean_dictionary_results(file_path_dictionary):
         print(f"{key}\nContains {value} files containing the search\n")
 
 
-def export_file_paths(path_dictionary, output_path):
-    current_date = datetime.now().strftime("%y-%m-%d")
-    file_name = f"Filepath_Output_{current_date}.csv"
+def export_file_paths(path_dictionary, search, output_path):
+    file_name = f"Filepath_Output_For_Search_{search}.csv"
     file_output = output_path + "\\" + file_name
 
     with open(file_output, "w", newline="") as output_file:
@@ -74,9 +72,11 @@ def export_file_paths(path_dictionary, output_path):
 
 
 if __name__ == '__main__':
-    tree_file_path = r"D:\testScripts\batch\directory_listing.txt"  # Path to the tree file
-    output_file_path = r"D:\testScripts\testOutput"  # Output file path
-    search_filename = "syntychristmas"  # Filename to search for
+    tree_file_path = r"C:\File_Directory_Search\directory_listing.txt"  # Path to the tree file
+    output_file_path = r"C:\File_Directory_Search\Search_Results"  # Output file path
+    search_filename = input("Enter your search here: ")  # Filename to search for
 
     file_paths = find_file_in_tree(tree_file_path, search_filename)
-    export_file_paths(file_paths, output_file_path)
+    export_file_paths(file_paths, search_filename, output_file_path)
+    stay_open = input()
+
